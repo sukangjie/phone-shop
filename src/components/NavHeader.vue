@@ -26,6 +26,7 @@
                     <div class="item-menu">
                         <span>手机类型1</span>
                         <div class="children">
+                            <!-- 隐藏部分 -->
                             <ul>
                                 <li class="product" v-for="(item, index) in phoneList" :key="index">
                                     <a :href="'/#/product/'+item.id" target="_blank">
@@ -122,7 +123,7 @@
 </template>
 
 <script>
- import {mapState} from 'vuex'
+import {mapState} from 'vuex'
 export default {
     name: 'NavHeader',
     data() {
@@ -243,62 +244,62 @@ export default {
                     }
                     &:hover {
                         color: #ff6600;
-                    .children {
-                            height:220px;
-                            opacity:1;
+                        .children {
+                                height:220px;
+                                opacity:1;  //hover状态下可以出现
+                        }
                     }
-                }
-                .children {
-                    position: absolute;
-                    top: 112px;
-                    left: 0;
-                    width: 1226px;
-                    height: 0;
-                    opacity: 0;
-                    overflow: hidden;
-                    border-top: 1px solid #E5E5E5;
-                    box-shadow:0px 7px 6px 0px rgba(0, 0, 0, 0.11);
-                    z-index: 10;
-                    transition:all .5s;
-                    background-color: #ffffff;
-                    .product {
-                        position: relative;
-                        float: left;
-                        width: 16.6%;
-                        height: 220px;
-                        font-size: 12px;
-                        line-height: 12px;
-                        text-align: center;
-                        a {
-                            display: inline-block;
-                        }
-                        img {
-                            width: auto;
-                            height: 111px;
-                            margin-top: 26px;
-                        }
-                        .pro-img{
-                            height: 137px;
-                        }
-                        .pro-name {
-                            font-weight: bold;
-                            margin-top: 19px;
-                            margin-bottom: 8px;
-                            color: #333333;
-                        }
-                        .pro-price {
-                            color: #ff6600;
-                        }
-                        &::before {
-                            content: ' ';
-                            position: absolute;
-                            top: 28px;
-                            right: 0;
-                            border-left: 1px solid #d7d7d7;
-                            height: 100px;
-                            width: 1px;
-                        }
-                        &:last-child::before {
+                    .children {
+                        position: absolute;
+                        top: 112px;
+                        left: 0;
+                        width: 1226px;
+                        height: 0;//高度为零,超出部分之后隐藏
+                        opacity: 0;  //开始的时候是完全透明的
+                        overflow: hidden;
+                        border-top: 1px solid #E5E5E5;
+                        box-shadow:0px 7px 6px 0px rgba(0, 0, 0, 0.11);
+                        z-index: 10; //能够放在最上层
+                        transition: all .5s; //动画效果
+                        background-color: #ffffff;
+                        .product {
+                            position: relative;
+                            float: left;
+                            width: 16.6%;
+                            height: 220px;
+                            font-size: 12px;
+                            line-height: 12px;
+                            text-align: center;
+                            a {
+                                display: inline-block;
+                            }
+                            img {
+                                width: auto;
+                                height: 111px;
+                                margin-top: 26px;
+                            }
+                            .pro-img{
+                                height: 137px;
+                            }
+                            .pro-name {
+                                font-weight: bold;
+                                margin-top: 19px;
+                                margin-bottom: 8px;
+                                color: #333333;
+                            }
+                            .pro-price {
+                                color: #ff6600;
+                            }
+                            &::before { //用伪元素来画分割线
+                                content: ' ';
+                                position: absolute;
+                                top: 28px;
+                                right: 0;
+                                border-left: 1px solid #d7d7d7;
+                                height: 100px;
+                                width: 1px;
+                            }
+                        &:last-child::before { //最后一个item没有分割线
                             display: none;
                         }
                     }
@@ -306,12 +307,12 @@ export default {
             }
         }
         .header-search {
-            width:319px;
+            width: 319px;
             .wrapper {
-                height:50px;
-                border:1px solid #E0E0E0;
-                display:flex;
-                align-items:center;
+                height: 50px;
+                border: 1px solid #E0E0E0;
+                display: flex;
+                align-items: center;
                 input {
                     border: none;
                     box-sizing: border-box;

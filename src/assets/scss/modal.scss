@@ -28,9 +28,9 @@
           font-size: 16px;
           .icon-close{
             @include positionImg(absolute,23px,25px,14px,14px,'/imgs/icon-close.png');
-            transition: transform .3s;
+            transition: transform .3s; //给所有的转换函数都配置了相同的过渡
             &:hover{
-              transform: scale(1.5);
+              transform: scale(1.5); //收缩比
             }
           }
         }

@@ -32,7 +32,7 @@ export default {
             display: inline-block;
             width: 20px;
             height: 20px;
-            vertical-align: middle;
+            vertical-align: middle; //垂直居中显示
             margin-right: 8px;
         }
         .icon-setting {

@@ -160,11 +160,11 @@ export default {
         },
         getProductList() {//获取产品数量
             this.axios.get('/products', {
-                params: {//传参
+                params: {  //传参
                     categoryId: '100012',
-                    pageSize: 6//一页查六条
+                    pageSize: 6   //一页查六条
                 }
-            }).then(res => {//获取后的值放在phoneList 中
+            }).then(res => {  //获取后的值放在phoneList 中
                     this.phoneList = res.list;
                     // console.log(this.phoneList)
             })

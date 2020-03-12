@@ -68,13 +68,13 @@ export default {
       showSlide: '', //控制动画效果
       product: {}, //商品信息
       swiperOption: {
-        autoplay: true,
-        slidePreView: 3,
-        spaceBetweent: 30,
-        freeMode: true,
+        autoplay: true,   //自动滑动
+        slidePreView: 3, //可视区放几个slide
+        spaceBetweent: 30,  //中间空隙
+        freeMode: true,  //是否贴合
         pagination: {
           el: '.swiper-pagination',
-          clickable: true
+          clickable: true  //翻页点可以被点击
         }
       }
     }

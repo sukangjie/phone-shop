@@ -1,8 +1,8 @@
 <template>
     <div class="login">
-        <div class="container">
+        <!-- <div class="container">
             <a href="/#/index"></a>
-        </div>
+        </div> -->
         <div class="wrapper">
             <div class="container">
                 <div class="login-form">
@@ -74,3 +74,71 @@ export default {
     }
 }
 </script>
+<style lang="scss" scoped>
+.login {
+    .wrapper {
+        background: url('/imgs/login-bg.jpg') no-repeat center;
+        .container {
+            height: 576px;
+            .login-form {
+                box-sizing: border-box;
+                padding-left: 30px;
+                padding-right: 30px;
+                width: 410px;
+                height: 510px;
+                background-color: #ffffff;
+                position: absolute;
+                right: 0;
+                bottom: 30px;
+                h3 {
+                    font-size: 24px;
+                    line-height: 23px;
+                    text-align: center;
+                    margin: 40px auto 49px;
+                    .checked {
+                        color: #FF6600;
+                    }
+                    .sep-line {
+                        margin: 0 32px;
+                    }
+                }
+                .input {
+                    display: inline-block;
+                    width: 348px;
+                    height: 50px;
+                    border: solid 1px #E5E5E5;
+                    margin-bottom: 20px;
+                    input {
+                        width: 100%;
+                        height: 100%;
+                        border: none;
+                        padding: 18px;
+                    }
+                }
+                .btn {
+                    width:100%;
+                    line-height:50px;
+                    margin-top:10px;
+                    font-size:16px;
+                }
+                .tips {
+                    margin-top: 14px;
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 14px;
+                    cursor: pointer;
+                    .sms {
+                        color: #FF6600;
+                    }
+                    .reg {
+                        color: #999999;
+                        span {
+                            margin: 0 7px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+</style>

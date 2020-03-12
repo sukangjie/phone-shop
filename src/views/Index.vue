@@ -228,7 +228,7 @@ export default {
     },
     addCart(id) {//加入购物车
       this.axios.get('/carts', {
-        params: {
+        params: {   //get 方法传参
           productId: id,
           selected: true
         }

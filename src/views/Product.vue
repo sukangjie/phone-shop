@@ -41,6 +41,7 @@
           <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
           <div class="video-bg" @click="showSlide='slideDown'"></div>
           <div class="video-box" v-show="showSlide">
+            <!-- 遮罩层 -->
             <div class="overlay"></div>
             <div class="video" :class="showSlide">
               <span class="icon-close" @click="closeVideo"></span>
@@ -90,11 +91,11 @@ export default {
     },
     buy() {
       let id = this.$route.params.id;
-      this.$router.push(`detail/${id}`);
+      this.$router.push(`/detail/${id}`);
     },
     closeVideo() {
       this.showSlide = 'slideUp';
-      setTimeout(() => {
+      setTimeout(() => {  //关闭遮罩层
         this.showSlide = '';
       }, 600)
     }
@@ -103,4 +104,149 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './../assets/scss/mixin.scss';
+.product {
+  .content {
+    .item-bg {
+      background: url('/imgs/product/product-bg-1.png') no-repeat center;
+      height: 718px;
+      text-align: center;
+      h2 {
+        padding-top: 55px;
+        font-size: 80px;
+      }
+      h3 {
+        font-size: 24px;
+        letter-spacing: 10px; //每个字符的间隔
+      }
+      p {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        a {
+          font-size: 16px;
+          color: #333333;
+        }
+        span {
+          margin: 0 15px;
+        }
+      }
+      .price {
+        font-size: 30px;
+        color: #333333;
+        em {
+          font-style: normal;
+          font-size: 38px;
+        }
+      }
+    }
+    .item-bg-2 {
+      background: url('/imgs/product/product-bg-2.png') no-repeat center;
+      height: 480px;
+      background-size: 1226px 397px;
+    }
+    .item-bg-3 {
+      background: url('/imgs/product/product-bg-3.png') no-repeat center;
+      height: 638px;
+      background-size: cover;
+    }
+    .item-swiper {
+      margin: 36px auto 52px; 
+      .desc {
+        font-size: 18px;
+        color: #333333;
+        text-align: center;
+      }
+      img {
+        width: 100%;
+      }
+    }
+    .item-video {
+      height: 1044px;
+      background-color: #070708;
+      margin-bottom: 76px;
+      color: #ffffff;
+      text-align: center;
+      h2 {
+        font-size: 60px;
+        padding-top: 60px;
+        margin-bottom: 47px;
+      }
+      p {
+        font-size: 24px;
+        margin-bottom: 58px;
+      }
+      .video-bg {
+        background: url('/imgs/product/gallery-1.png') no-repeat center;
+        background-size: cover;
+        width: 1226px;
+        height: 540px;
+        margin: 0 auto 120px; //居中显示
+        cursor: pointer;
+      }
+      .video-box {
+        .overlay {  //蒙层
+          @include position(fixed);
+          background-color: #333333;
+          opacity: .4;  //透明度
+          z-index: 10;
+        }
+         // 定义动画
+        @keyframes slideDown { //动画
+          from {  //刚开始的位置
+            top: -50%;
+            opacity: 0;
+          }
+          to {   //进来后
+            top: 50%;
+            opacity: 1;
+          }
+        }
+        @keyframes slideUP {  //向上
+          from {
+            top: 50%;
+            opacity: 1;
+          }
+          to {
+            top: -50%;
+            opacity: 0;
+          }
+        }
+        .video {
+          position: fixed;
+          top: -50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 10;
+          width: 1000px;
+          height: 536px;
+          opacity: 1;
+          &.slideDown {
+            animation: slideDown .6s linear;
+            top: 50%;
+          }
+          &.slideUp {
+            animation: slideUp .6s linear;
+          }
+          .icon-close { //关闭插号
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            @include bgImg(20px, 20px, '/imgs/icon-close.png');
+            cursor: pointer;
+            z-index: 11;
+          }
+          video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; //覆盖
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+  button {
+    margin-left: 10px;
+  }
+}
 </style>

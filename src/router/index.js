@@ -28,5 +28,15 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('../views/Login.vue')
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: () => import('../views/Cart.vue')
+    }
   ]
 });

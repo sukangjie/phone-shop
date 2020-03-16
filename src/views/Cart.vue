@@ -13,6 +13,7 @@
                         <li class="col-1">单价</li>
                         <li class="col-2">数量</li>
                         <li class="col-1">小计</li>
+                        
                         <li class="col-1">操作</li>
                     </ul>
                     <ul class="cart-item-list">

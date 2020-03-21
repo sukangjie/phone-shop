@@ -1,36 +1,37 @@
 .modal {
     @include position(fixed);
     z-index: 10;
-    transition: all .5s;
-    .mask {
+    transition: all .5s;  //动画效果
+    .mask { //遮罩层
         @include position(fixed);
         background-color: #000000;
-        opacity: 0.5;
+        opacity: 0.5; //透明度
     }
-    &.slide-enter-active{//移入的时候
-        top:0;
+    &.slide-enter-active{//进入的时候
+        top: 0;
     }
-    &.slide-leave-active{//移出
+    &.slide-leave-active{//离开过程
         top:-100%;
     }
-    &.slide-enter{
-        top:-100%;
+    &.slide-enter{  //进入之前
+        top: -100%;
     }
-    .modal-dialog{
+    .modal-dialog{  //最后定位的位置
         @include position(absolute, 40%, 50%, 660px, auto);
         background-color: #ffffff;
         transform: translate(-50%,-50%);
         .modal-header{
           height: 60px;
-          background-color: #F5F5F5;
-          padding: 0 25px;
           line-height: 60px;
+          background-color: #F5F5F5;
+          padding: 0 25px;   
           font-size: 16px;
+          // 关闭按钮的位置
           .icon-close{
             @include positionImg(absolute,23px,25px,14px,14px,'/imgs/icon-close.png');
             transition: transform .3s; //给所有的转换函数都配置了相同的过渡
             &:hover{
-              transform: scale(1.5); //收缩比
+              transform: scale(1.5); //收缩比 .3s 就是上面的transition定义的
             }
           }
         }

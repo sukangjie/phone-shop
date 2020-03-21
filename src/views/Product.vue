@@ -22,6 +22,7 @@
             <span>￥<em>{{product.price}}</em></span>
           </div>
         </div>
+
         <div class="item-bg-2"></div>
         <div class="item-bg-3"></div>
         <div class="item-swiper">
@@ -36,16 +37,21 @@
           </swiper>
           <p class="desc">小米8 AI变焦双摄拍摄</p>
         </div>
+        <!-- 视频展示 -->
         <div class="item-video">
           <h2>60帧超慢动作摄影<br/>慢慢回味每一瞬间的精彩</h2>
           <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
+          <!-- 播放按钮 点击之后视频下滑下来 -->
           <div class="video-bg" @click="showSlide='slideDown'"></div>
+          
           <div class="video-box" v-show="showSlide">
             <!-- 遮罩层 -->
             <div class="overlay"></div>
+            <!-- 视频 -->
             <div class="video" :class="showSlide">
+              <!-- 关闭视频按钮 -->
               <span class="icon-close" @click="closeVideo"></span>
-              <video src="/imgs/product/video.mp4" muted autoplay controls="controls"></video>
+              <video src="/imgs/product/video.mp4" muted autoplay controls="controls" ref="video"></video>
             </div>
           </div>
         </div>
@@ -95,7 +101,13 @@ export default {
     },
     closeVideo() {
       this.showSlide = 'slideUp';
-      setTimeout(() => {  //关闭遮罩层
+      let myVideo = this.$refs.video;
+      if (myVideo.paused) {
+        myVideo.play();
+      }else {
+        myVideo.pause();
+      }
+      setTimeout(() => {  //关闭视频和遮罩层
         this.showSlide = '';
       }, 600)
     }
@@ -150,7 +162,7 @@ export default {
       background-size: cover;
     }
     .item-swiper {
-      margin: 36px auto 52px; 
+      margin: 30px auto 50px; 
       .desc {
         font-size: 18px;
         color: #333333;
@@ -163,7 +175,7 @@ export default {
     .item-video {
       height: 1044px;
       background-color: #070708;
-      margin-bottom: 76px;
+      margin-bottom: 70px;
       color: #ffffff;
       text-align: center;
       h2 {
@@ -175,7 +187,7 @@ export default {
         font-size: 24px;
         margin-bottom: 58px;
       }
-      .video-bg {
+      .video-bg { //视频图片背景
         background: url('/imgs/product/gallery-1.png') no-repeat center;
         background-size: cover;
         width: 1226px;

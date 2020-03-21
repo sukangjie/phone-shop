@@ -17,18 +17,18 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import './../assets/scss/mixin.scss';
+@import './../assets/scss/base.scss';
 @import './../assets/scss/mixin.scss';
 .service {
     padding: 33px 0;
     color: #666666;
     font-size: 16px;
     li {
-        display: inline-block;
+        display: inline-block;//放在一行
         width: 24.9%;
         text-align: center;
         border-right: 1px solid #E5E5E5;
-        span {
+        span { //放图片
             display: inline-block;
             width: 20px;
             height: 20px;

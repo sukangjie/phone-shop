@@ -2,11 +2,12 @@
   <div class="index">
     <div class="container">
       <div class="swiper-box">
+
         <div class="nav-menu">
           <ul class="menu-wrap">
             <li class="menu-item">
               <a href="javascript:;">手机 电话卡</a>
-              <!-- 点击之后展示出来 -->
+              <!-- hover之后展示出来 -->
               <div class="children">
                 <!-- 双层循环 -->
                 <ul v-for="(item, index) in menuList" :key="index">
@@ -18,6 +19,7 @@
                   </li>
                 </ul>
               </div>
+
             </li>
             <li class="menu-item">
               <a href="javascript:;">电视 盒子</a>
@@ -42,16 +44,23 @@
             </li>
           </ul>
         </div>
+
         <!-- 轮播图 -->
-        <swiper v-bind:options="swiperOption">
-          <swiper-slide v-for="(item,index) in slideList" :key="index">
-            <a :href="'/#/product/'+item.id"><img :src="item.img"></a>
-          </swiper-slide>
-          <!-- Optional controls -->
-          <div class="swiper-pagination"  slot="pagination"></div>
-          <div class="swiper-button-prev" slot="button-prev"></div>
-          <div class="swiper-button-next" slot="button-next"></div>
-        </swiper>
+        <div class="swiper-container">
+          <swiper v-bind:options="swiperOption">
+            <!-- 有多少副图就有多少个slide -->
+            <swiper-slide v-for="(item,index) in slideList" :key="index">
+              <a :href="'/#/product/'+item.id"><img :src="item.img"></a>
+            </swiper-slide>
+            <!-- Optional controls -->
+            <!-- 分页小圆点 -->
+            <div class="swiper-pagination"  slot="pagination"></div>
+            <!-- 左右翻页箭头 -->
+            <div class="swiper-button-prev" slot="button-prev"></div>
+            <div class="swiper-button-next" slot="button-next"></div>
+          </swiper>
+        </div>
+
       </div>
       <!-- 广告 -->
       <div class="ads-box">
@@ -74,6 +83,7 @@
           <div class="banner-left">
             <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'"></a>
           </div>
+
           <div class="list-box">
             <div class="list" v-for="(arr, i) in phoneList" :key="i">
               <div class="item" v-for="(item,j) in arr" :key="j">
@@ -96,6 +106,7 @@
     <!-- 组件 -->
     <service-bar></service-bar>
     <!-- 通过数据绑定的形式,实现父子组件传参 -->
+    <!-- modal是点击加入购物车之后滑动进来的组件 -->
     <modal 
       title="提示" 
       sureText="查看购物车" 
@@ -204,6 +215,7 @@ export default {
             img:'/imgs/ads/ads-4.jpg'
           }
         ],
+
         phoneList: [],
         showModal: false
     }
@@ -215,8 +227,8 @@ export default {
     init() {
       this.axios.get('/products', {
         params: { //传参
-          categoryId:100012,
-          pageSize:14
+          categoryId: 100012,
+          pageSize: 14
         }
       }).then((res) => {
           //查出来的数据前六条给重新赋值，前面的轮播图用的
@@ -235,7 +247,7 @@ export default {
       }).then((res) => {
          // 展示出弹框
          this.showModal = true;
-         //调用actions中的方法
+         //调用actions中的方法，保存购物车的总数量
          this.$store.dispatch('saveCartCount',res.cartTotalQuantity);
       }).catch(() => {
         // 展示出弹窗
@@ -273,28 +285,28 @@ export default {
               font-size: 16px;
               color: #ffffff;
               padding-left: 30px;
-              &::after{
+              &::after{ //箭头
+                content: ' '; //占位
                 position: absolute;
                 right: 30px;
                 top: 17.5px;
-                content: ' ';
                 @include bgImg(10px,15px,'/imgs/icon-arrow.png');
               }
             }
             &:hover{
               background-color: #ff6600;
-              .children{
-                display: block;
+              .children{//展示出来
+                display: block; 
               }
             }
             .children{
-              display: none;
-              width:962px;
-              height:451px;
+              display: none;  //隐藏
+              width: 962px;
+              height: 451px;
               background-color: #ffffff;
               position:absolute;
               top: 0;
-              left: 264px;
+              left: 264px;  //左边菜单栏的宽度要空出来
               border: 1px solid #e5e5e5;
               ul{
                 display: flex;
@@ -327,6 +339,9 @@ export default {
         .swiper-button-prev{
           left: 274px;
         }
+        .swiper-button-next { 
+          right: 10px;
+        }
         img{
           width: 100%;
           height: 100%;
@@ -335,20 +350,34 @@ export default {
     }
     .ads-box{
       @include flex();
-      margin-top: 14px;
-      margin-bottom: 31px;
+      margin: 14px 8px;
+
       a{
-        width: 296px;
-        height: 160px;
+        display: block;
+        width: 322px;
+        height: 167px;
+        img{
+          width: 100%;
+          height: 100%;
+        }
+        
       }
     }
     .banner{
-      margin-bottom: 50px;
+      a {
+        display: block;
+        img {
+          width: 100%;
+          height: 150px;
+
+        }
+      } 
     }
-    .product-box{
+    .product-box {
       background-color:#F5F5F5;
       padding: 30px 0 50px;
-      h2{
+      h2 {
+        padding-left: 5px;
         font-size: 22px;
         height: 21px;
         line-height: 21px;
@@ -413,8 +442,7 @@ export default {
                   color: #F20A0A;
                   font-size: 14px;
                   font-weight: bold;
-                  cursor: pointer;
-                  &:after{
+                  &::after{
                     @include bgImg(22px,22px,'/imgs/icon-cart-hover.png');
                     content: ' ';
                     margin-left: 5px;

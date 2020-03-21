@@ -1,6 +1,7 @@
 <template>
     <div class="header">
         <div class="nav-topbar">
+
             <div class="container">
                 <div class="topbar-menu">
                     <a href="javascript:;" class="logo">手机商城</a>
@@ -13,9 +14,11 @@
                     <a href="javascript:;" v-if="!username" @click="login">登录</a>
                     <a href="javascript:;" v-if="username" @click="logout">退出</a>
                     <a href="/#/order/list" v-if="username">我的订单</a>
+                    <!-- 利用spa标签放图标 -->
                     <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
                 </div>
             </div>
+            
         </div>
         <div class="nav-header">
             <div class="container">
@@ -25,8 +28,8 @@
                 <div class="header-menu">
                     <div class="item-menu">
                         <span>手机类型1</span>
+                         <!-- 隐藏部分 -->
                         <div class="children">
-                            <!-- 隐藏部分 -->
                             <ul>
                                 <li class="product" v-for="(item, index) in phoneList" :key="index">
                                     <a :href="'/#/product/'+item.id" target="_blank">
@@ -43,8 +46,10 @@
                     <div class="item-menu">
                         <span>手机类型2</span>
                     </div>
+
                     <div class="item-menu">
                         <span>电视</span>
+                        <!-- 隐藏部分 -->
                         <div class="children">
                             <ul>
                                 <li class="product">
@@ -110,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- 搜索框 -->
                 <div class="header-search">
                     <div class="wrapper">
                         <input type="text" name="keyword">
@@ -131,7 +136,7 @@ export default {
             phoneList: []
         }
     },
-    computed: {//计算属性获取store中的用户名和购物车数量
+    computed: {//计算属性获取store中的用户名和购物车数量进行缓存
         /*username(){
         return this.$store.state.username;
       },
@@ -149,8 +154,8 @@ export default {
     mounted() {
         this.getProductList();
         // 传参
-        let params = this.$route.params;
-        if(params && params.from == 'login'){
+        let params = this.$route.params;//获取路由参数
+        if(params && params.from == 'login'){  //如果路由为登录的状态，就获取购物车的商品数量
             this.getCartCount();
         }
     },
@@ -171,7 +176,8 @@ export default {
         },
         getCartCount() {
             this.axios.get('/carts/products/sum').then((res=0)=>{
-                this.$store.dispatch('saveCartCount',res);
+                // 保存购物车的数量
+                this.$store.dispatch('saveCartCount', res);
             })
         },
         logout() {//退出登录
@@ -179,7 +185,7 @@ export default {
                 this.$message.success('退出成功');
                 //清除cookie的缓存
                 this.$cookie.set('userId','',{expires:'-1'});
-                //修改用户名和购物车数量
+                //清除用户名和购物车数量
                 this.$store.dispatch('saveUserName','');
                 this.$store.dispatch('saveCartCount','0');
             })
@@ -195,6 +201,7 @@ export default {
 @import './../assets/scss/mixin.scss';
 .header {
     .nav-topbar {
+        // height和line-hieght一样 让元素垂直居中
         height: 39px;
         line-height: 39px;
         background-color: #333333;
@@ -227,7 +234,7 @@ export default {
         .container {
             position: relative;
             height: 112px;
-            @include flex();
+            @include flex();//弹性布局
             .header-menu {
                 display: inline-block;
                 width: 643px;
@@ -242,6 +249,7 @@ export default {
                     span {
                         cursor:pointer;
                     }
+                    //鼠标移动到导航栏的状态
                     &:hover {
                         color: #ff6600;
                         .children {
@@ -256,16 +264,17 @@ export default {
                         width: 1226px;
                         height: 0;//高度为零,超出部分之后隐藏
                         opacity: 0;  //开始的时候是完全透明的
-                        overflow: hidden;
+                        overflow: hidden;  //超出部分隐藏
                         border-top: 1px solid #E5E5E5;
-                        box-shadow:0px 7px 6px 0px rgba(0, 0, 0, 0.11);
-                        z-index: 10; //能够放在最上层
+                        // 水平阴影 垂直阴影 模糊距离 阴影尺寸 颜色
+                        box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
+                        z-index: 10; //只有在定位的情况下能够用这个属性   放在最上层
                         transition: all .5s; //动画效果
                         background-color: #ffffff;
                         .product {
                             position: relative;
                             float: left;
-                            width: 16.6%;
+                            width: 16.6%;//每一个产品占父元素的百分比
                             height: 220px;
                             font-size: 12px;
                             line-height: 12px;
@@ -299,34 +308,34 @@ export default {
                                 height: 100px;
                                 width: 1px;
                             }
-                        &:last-child::before { //最后一个item没有分割线
-                            display: none;
+                            &:last-child::before { //最后一个item没有分割线
+                                display: none;
+                            }
                         }
                     }
                 }
             }
-        }
-        .header-search {
-            width: 319px;
-            .wrapper {
-                height: 50px;
-                border: 1px solid #E0E0E0;
-                display: flex;
-                align-items: center;
-                input {
-                    border: none;
-                    box-sizing: border-box;
-                    border-right: 1px solid #E0E0E0;
-                    width: 264px;
+            .header-search {
+                width: 319px;
+                .wrapper {
                     height: 50px;
-                    padding-left: 14px;
-                }
-                a {
-                    @include bgImg(18px,18px,'/imgs/icon-search.png');
-                    margin-left: 17px;
+                    border: 1px solid #E0E0E0;
+                    display: flex;
+                    align-items: center;
+                    input {
+                        border: none;
+                        box-sizing: border-box;
+                        border-right: 1px solid #E0E0E0;
+                        width: 264px;
+                        height: 50px;
+                        padding-left: 14px;
+                    }
+                    a {
+                        @include bgImg(18px,18px,'/imgs/icon-search.png');
+                        margin-left: 17px;
+                    }
                 }
             }
-        }
         }
     }
 }

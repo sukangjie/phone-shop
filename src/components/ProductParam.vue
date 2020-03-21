@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-bar" :class="{'is_fixed':isFixed}">
+    <div class="nav-bar" :class="{'is_fixed': isFixed}">
         <div class="container">
             <div class="pro-title">
                 {{title}}
@@ -26,13 +26,13 @@ export default {
             isFixed: false
         }
     },
-    mounted() {
+    mounted() { 
         window.addEventListener('scroll', this.initHeight);
     },
     methods: {
-        initHeight() {
+        initHeight() {  //监听吸顶功能
             let scrollTop = window.pageXOffset || document.documentElement.scrollTop || document.body.scrollTop;
-            this.isFixed = scrollTop > 152? true: false;
+            this.isFixed = scrollTop > 160? true: false;
         }
     },
     destroyed() {
@@ -48,11 +48,11 @@ export default {
      border-top: 1px solid #e5e5e5;
      background-color: #ffffff;
      z-index: 10;
-     &.is_Fixed {
+     &.is_fixed {
          width: 100%;
          position: fixed;
          top: 0;
-         box-shadow: 0 5px 5px  #cccccc;
+         box-shadow: 0 3px 3px  #cccccc;
      }
      .container {
          @include flex();
@@ -62,7 +62,7 @@ export default {
              font-weight: bold;
          }
          .pro-param {
-             font-size:  #F5F5F5;
+             font-size: 14px;
              span {
                  margin: 0 10px;
              }

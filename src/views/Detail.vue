@@ -21,23 +21,13 @@
             <div class="delivery">小米自营</div>
             <div class="item-price">{{product.price}}元<span class="del">1999元</span></div>
             <div class="line"></div>
-            <!-- <div class="item-addr">
-              <i class="icon-loc"></i>
-              <div class="addr">北京 北京市 朝阳区 安定门街道</div>
-              <div class="stock">有现货</div>
-            </div> -->
+           
             <div class="item-version clearfix">
               <h2>选择版本</h2>
               <div class="phone fl" :class="{'checked':version==1}" @click="version=1">6GB+64GB 全网通</div>
               <div class="phone fr" :class="{'checked':version==2}" @click="version=2">4GB+64GB 移动4G</div>
             </div>
-            <!-- <div class="item-color">
-              <h2>选择颜色</h2>
-              <div class="phone checked">
-                <span class="color"></span>
-                深空灰
-              </div>
-            </div> -->
+            
             <div class="item-total">
               <div class="phone-info clearfix">
                 <div class="fl">{{product.name}} {{version==1?'6GB+64GB 全网通':'4GB+64GB 移动4G'}} 深灰色</div>
@@ -92,7 +82,7 @@ export default {
       })
     },
     addCart() {
-      this.axios.post('/carts', {
+      this.axios.post('/cars', {
         productId: this.id,
         selected: true
       }).then((res = {cartProductVoList: 0}) => {

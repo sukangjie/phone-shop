@@ -2,6 +2,7 @@
 .container {
     position: relative;
     width: 1300px;
+    //左右默认外边距为16.5px
     margin-right: auto;
     margin-left: auto;
 }
@@ -28,7 +29,7 @@ input {
     content: ' ';
     display: table;
 }
-.clearfix::after {
+.clearfix::after {//清除浮动
     clear: both;
 }
 

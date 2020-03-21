@@ -19,7 +19,7 @@ if (mock) {
 // axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5dc7afee2b69d9223b633cbb/mimall';
  axios.defaults.baseURL = '/api';
 // axios.defaults.baseURL = 'http://localhost:8080';
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 3000;
 
 // 根据环境变量获取不同的请求地址
 // axios.defaults.baseURL = env.baseURL;
